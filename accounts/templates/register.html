@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    .register-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+    
+    .register-box {
+        background-color: #f2f2f2;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 20px;
+        max-width: 400px;
+        width: 100%;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    .form-group {
+        margin-bottom: 10px;
+    }
+    
+    label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+    
+    input[type="text"],
+    input[type="password"] {
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+    
+    input[type="submit"] {
+        background-color: #4CAF50;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+</style>
+
+<div class="register-container">
+    <div class="register-box">
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                {{ user_form.username.errors }}
+                <label>Usuário:</label>
+                {{ user_form.username }}
+            </div>
+
+            <div class="form-group">
+                {{ user_form.password1.errors }}
+                <label>Senha:</label>
+                {{ user_form.password1 }}
+            </div>
+
+            <div class="form-group">
+                {{ user_form.password2.errors }}
+                <label>Confirmação de senha:</label>
+                {{ user_form.password2 }}
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Cadastrar">
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}
