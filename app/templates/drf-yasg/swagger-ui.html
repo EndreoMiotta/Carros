@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+    {% load static %}
+    <div id="swagger-ui"></div>
+    <script src="{% static 'drf-yasg/swagger-ui-bundle.js' %}"></script>
+    <script src="{% static 'drf-yasg/swagger-ui-standalone-preset.js' %}"></script>
+    <script>
+        const specUrl = "{% url 'schema-swagger-ui' %}";
+        const ui = SwaggerUIBundle({
+            url: specUrl,
+            dom_id: '#swagger-ui',
+            deepLinking: true,
+            presets: [
+                SwaggerUIBundle.presets.apis,
+                SwaggerUIStandalonePreset
+            ],
+            plugins: [],
+            layout: "BaseLayout"
+        });
+        window.ui = ui;
+    </script>
+{% endblock %}

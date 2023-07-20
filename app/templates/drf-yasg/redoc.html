@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+    {% load static %}
+    <div id="redoc-container"></div>
+    <script src="{% static 'drf-yasg/redoc.js' %}"></script>
+    <script>
+        const specUrl = "{% url 'schema-redoc' %}";
+        const redocOptions = {};
+        Redoc.init(specUrl, redocOptions, document.getElementById('redoc-container'));
+    </script>
+{% endblock %}
