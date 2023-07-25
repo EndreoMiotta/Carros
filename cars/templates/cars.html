@@ -1,6 +1,29 @@
 {% extends 'base.html' %}
 {% block content %}
   <style>
+    .messages {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+  
+    .messages li {
+      background-color: #d4edda;
+      border: 1px solid #c3e6cb;
+      border-radius: 4px;
+      color: #155724;
+      font-size: 16px;
+      margin-bottom: 10px;
+      padding: 10px;
+      text-align: center;
+    }
+  
+    .messages li.success {
+      background-color: #28a745;
+      border-color: #218838;
+      color: #fff;
+    }
+
     .car-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -101,11 +124,18 @@
       color: #0096c7
     }
   </style>
-
+  {% if messages %}
+  <ul class="messages">
+    {% for message in messages %}
+      <li class="{% if message.tags %}{{ message.tags }}{% endif %}">{{ message }}</li>
+    {% endfor %}
+  </ul>
+  {% endif %}
   <form method="GET" action="{% url 'cars_list' %}">
     <input type="text" name="search" placeholder="Buscar carro...">
     <button type="submit">Buscar</button>
   </form>
+  
 
   <div class="car-grid">
     {% if cars %}
